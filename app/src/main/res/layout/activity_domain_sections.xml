@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".DomainSections">
+
+    <TextView
+        android:id="@+id/fashion_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Fashion"
+        android:textSize="25sp"
+        android:background="@color/teal_200"/>
+
+    <TextView
+        android:id="@+id/sports_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Sports"
+        android:textSize="25sp"
+        android:background="@color/teal_200"/>
+
+    <TextView
+        android:id="@+id/tech_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Tech"
+        android:textSize="25sp"
+        android:background="@color/teal_200"/>
+
+    <TextView
+        android:id="@+id/others_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Others"
+        android:textSize="25sp"
+        android:background="@color/teal_200"/>
+
+    <TextView
+        android:id="@+id/user_profile_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="User"
+        android:textSize="25sp"
+        android:background="@color/teal_200"/>
+
+    <TextView
+        android:id="@+id/chat_bot_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Chat with us"
+        android:textSize="25sp"
+        android:background="@color/teal_200"/>
+
+</LinearLayout>
