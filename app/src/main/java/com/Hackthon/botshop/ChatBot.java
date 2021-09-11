@@ -11,7 +11,7 @@ public class ChatBot extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_bot);
 
-
+             //this is changes made by me and for si
 
     }
 }
