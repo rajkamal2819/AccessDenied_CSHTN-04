@@ -60,5 +60,13 @@
         android:text="Chat with us"
         android:textSize="25sp"
         android:background="@color/teal_200"/>
+    <TextView
+        android:id="@+id/signout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Sign Out"
+        android:textSize="25sp"
+        android:background="@color/teal_200"/>
 
 </LinearLayout>

@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class DomainSections extends AppCompatActivity {
 
     TextView fashion;
@@ -15,6 +17,7 @@ public class DomainSections extends AppCompatActivity {
     TextView tech;
     TextView chatBot;
     TextView user;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,7 @@ public class DomainSections extends AppCompatActivity {
         tech = findViewById(R.id.tech_textView);
         chatBot = findViewById(R.id.chat_bot_textView);
         user = findViewById(R.id.user_profile_textView);
+
 
         chatBot.setOnClickListener(new View.OnClickListener() {
             @Override
