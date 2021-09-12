@@ -34,7 +34,8 @@
             android:exported="true" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/login_Theme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
