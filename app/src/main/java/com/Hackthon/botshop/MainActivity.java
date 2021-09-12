@@ -29,6 +29,7 @@ import static android.content.ContentValues.TAG;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static String LOG_TAG = MainActivity.class.getSimpleName();
    private  GoogleSignInClient mGoogleSignInClient;
     private int RC_SIGN_IN = 123;
    private FirebaseAuth mAuth;
@@ -39,11 +40,11 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-   btn = findViewById(R.id.google_sign_in_button);
+   btn = findViewById(R.id.sign_in_with_google_button);
 
 // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestIdToken("51643308532-clo824oss78abenb4o7ke5h1s3lobame.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
 
@@ -56,13 +57,13 @@ public class MainActivity extends AppCompatActivity {
           }
       });
 
-
-
+        Log.i(LOG_TAG,"On Create");
 
     }
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
+        Log.i(LOG_TAG,"Sign in done");
     }
 
     @Override
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
+            Log.i(LOG_TAG,"ResultCode: "+resultCode);
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 // Google Sign In was successful, authenticate with Firebase
@@ -83,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }
+        Log.i(LOG_TAG,"OnActivityResult");
     }
 
     @Override
@@ -91,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
+        Log.i(LOG_TAG,"On start");
     }
 
     private void updateUI(FirebaseUser currentUser)
@@ -98,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
             if(currentUser != null) {
                 Intent x = new Intent(MainActivity.this,DomainSections.class);
                 startActivity(x);
-
+                Log.i(LOG_TAG,"Update UI Working");
             }
     }
 
@@ -120,6 +124,8 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
+
+        Log.i(LOG_TAG,"FireBase Auth");
     }
 
 }

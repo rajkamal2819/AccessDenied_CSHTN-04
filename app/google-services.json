@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "51643308532-dn0v9a9qnb03n4epjn52m6avrq2jcp5r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.Hackthon.botshop",
+            "certificate_hash": "23e5ec5ba660263fb37a6ff559e8c388f3237055"
+          }
+        },
+        {
           "client_id": "51643308532-clo824oss78abenb4o7ke5h1s3lobame.apps.googleusercontent.com",
           "client_type": 3
         }
