@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,14 +32,14 @@ public class MainActivity extends AppCompatActivity {
    private  GoogleSignInClient mGoogleSignInClient;
     private int RC_SIGN_IN = 123;
    private FirebaseAuth mAuth;
-   private SignInButton btn;
+   private Button btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-   btn = (SignInButton)findViewById(R.id.signinbtn);
+   btn = findViewById(R.id.google_sign_in_button);
 
 // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
