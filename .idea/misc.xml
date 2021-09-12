@@ -12,10 +12,16 @@
         <entry key="..\:/Users/Admin/AndroidStudioProjects/BotShop/app/src/main/res/layout/activity_sports.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/BotShop/app/src/main/res/layout/activity_tech_domain.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/BotShop/app/src/main/res/layout/activity_user_profile.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Hackathon-TSEC/app/src/main/res/drawable-anydpi/ic_action_name.xml" value="0.2703125" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Hackathon-TSEC/app/src/main/res/drawable/corner3.xml" value="0.2703125" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Hackathon-TSEC/app/src/main/res/drawable/corners.xml" value="0.2703125" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Hackathon-TSEC/app/src/main/res/drawable/corners4.xml" value="0.2703125" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Hackathon-TSEC/app/src/main/res/layout/activity_chat_bot.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Hackathon-TSEC/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
