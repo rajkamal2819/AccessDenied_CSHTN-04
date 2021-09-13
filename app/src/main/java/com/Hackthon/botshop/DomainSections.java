@@ -1,6 +1,7 @@
 package com.Hackthon.botshop;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,12 +12,12 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class DomainSections extends AppCompatActivity {
 
-    TextView fashion;
-    TextView sports;
-    TextView others;
-    TextView tech;
-    TextView chatBot;
-    TextView user;
+    CardView fashion;
+    CardView sports;
+    CardView others;
+    CardView tech;
+    CardView chatBot;
+    CardView user;
 
 
     @Override
@@ -24,12 +25,12 @@ public class DomainSections extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_domain_sections);
 
-        fashion = findViewById(R.id.fashion_textView);
-        sports = findViewById(R.id.sports_textView);
-        others = findViewById(R.id.others_textView);
-        tech = findViewById(R.id.tech_textView);
-        chatBot = findViewById(R.id.chat_bot_textView);
-        user = findViewById(R.id.user_profile_textView);
+        fashion = findViewById(R.id.fashion_domain);
+        sports = findViewById(R.id.sports_domain);
+        others = findViewById(R.id.other_domain);
+        tech = findViewById(R.id.tech_domain);
+        chatBot = findViewById(R.id.chat_bot_domain);
+        user = findViewById(R.id.user_domain);
 
 
         chatBot.setOnClickListener(new View.OnClickListener() {

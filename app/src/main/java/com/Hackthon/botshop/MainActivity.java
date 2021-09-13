@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private int RC_SIGN_IN = 123;
    private FirebaseAuth mAuth;
    private Button btn;
+   private Button logIN;     //just for instance will remove later
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 //hello
@@ -58,6 +59,17 @@ public class MainActivity extends AppCompatActivity {
       });
 
         Log.i(LOG_TAG,"On Create");
+
+
+        //Just for our work i am creating a intent to the domain section directly by log in option
+        logIN = findViewById(R.id.login_button);
+        logIN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this,DomainSections.class);
+                startActivity(i);
+            }
+        });
 
     }
     private void signIn() {
