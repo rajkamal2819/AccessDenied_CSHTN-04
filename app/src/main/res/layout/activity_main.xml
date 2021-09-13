@@ -149,6 +149,7 @@
         android:text="Sign in with Google"
         android:textAllCaps="false"
         android:textSize="14sp" />
+
     <com.facebook.login.widget.LoginButton
         android:id="@+id/sign_with_facebook_button"
         android:layout_width="191dp"
@@ -160,14 +161,14 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:background="#4267B2"
-        android:gravity="center"
         android:drawableLeft="@drawable/fbicon"
         android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:onClick="buttonClickLoginFb"
         android:text="Sign in with Facebook"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="14sp"
-        android:onClick="buttonClickLoginFb"/>
+        android:textSize="14sp" />
 
 
 
