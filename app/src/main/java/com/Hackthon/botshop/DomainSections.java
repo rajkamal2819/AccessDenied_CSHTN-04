@@ -7,6 +7,7 @@ import androidx.cardview.widget.CardView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -81,8 +82,6 @@ public class DomainSections extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
-
 
     }
 
