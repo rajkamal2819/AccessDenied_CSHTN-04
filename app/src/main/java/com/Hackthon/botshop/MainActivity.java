@@ -42,14 +42,13 @@ import static android.provider.ContactsContract.Intents.Insert.EMAIL;
 public class MainActivity extends AppCompatActivity {
 
     private static String LOG_TAG = MainActivity.class.getSimpleName();
-   private  GoogleSignInClient mGoogleSignInClient;
+    private  GoogleSignInClient mGoogleSignInClient;
     private int RC_SIGN_IN = 123;
-   private FirebaseAuth mAuth;
-   FirebaseUser user;
-   LoginButton loginButton;
-   CallbackManager callbackManager;
-   private Button btn;
-   private Button logIN;     //just for instance will remove later
+    private FirebaseAuth mAuth;
+    FirebaseUser user;
+    LoginButton loginButton;
+    CallbackManager callbackManager;
+    private Button btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 //hello
@@ -80,25 +79,14 @@ public class MainActivity extends AppCompatActivity {
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         mAuth = FirebaseAuth.getInstance();
-      btn.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-              signIn();
-          }
-      });
-
-        Log.i(LOG_TAG,"On Create");
-
-
-        //Just for our work i am creating a intent to the domain section directly by log in option
-        logIN = findViewById(R.id.login_button);
-        logIN.setOnClickListener(new View.OnClickListener() {
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this,DomainSections.class);
-                startActivity(i);
+                signIn();
             }
         });
+
+        Log.i(LOG_TAG,"On Create");
 
     }
 
@@ -188,12 +176,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateUI(FirebaseUser currentUser)
- {
-            if(currentUser != null) {
-                Intent x = new Intent(MainActivity.this,DomainSections.class);
-                startActivity(x);
-                Log.i(LOG_TAG,"Update UI Working");
-            }
+    {
+        if(currentUser != null) {
+            Intent x = new Intent(MainActivity.this,DomainSections.class);
+            startActivity(x);
+            Log.i(LOG_TAG,"Update UI Working");
+        }
     }
 
     private void firebaseAuthWithGoogle(String idToken) {
@@ -217,5 +205,4 @@ public class MainActivity extends AppCompatActivity {
 
         Log.i(LOG_TAG,"FireBase Auth");
     }
-
 }

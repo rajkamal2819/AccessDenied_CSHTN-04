@@ -6,6 +6,7 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+
     <string name="facebook_app_id">378086150444032</string>
     <string name="fb_login_protocol_scheme">fb378086150444032</string>
 
