@@ -1,5 +1,6 @@
 package com.Hackthon.botshop;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
@@ -81,5 +82,13 @@ public class DomainSections extends AppCompatActivity {
             }
         });
 
+
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        finishAffinity();
+        super.onBackPressed();
     }
 }

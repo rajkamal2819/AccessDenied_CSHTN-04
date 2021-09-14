@@ -206,4 +206,5 @@ public class MainActivity extends AppCompatActivity {
 
         Log.i(LOG_TAG,"FireBase Auth");
     }
+
 }

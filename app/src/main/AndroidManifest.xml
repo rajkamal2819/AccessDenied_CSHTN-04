@@ -16,28 +16,36 @@
 
         <activity
             android:name=".FashionDomain"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".UserProfile"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".Others"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".TechDomain"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".Sports"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".ChatBot"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".DomainSections"
+            android:screenOrientation="portrait"
             android:exported="true"
             android:theme="@style/login_Theme"/>
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="portrait"
             android:exported="true"
             android:theme="@style/login_Theme">
             <intent-filter>
