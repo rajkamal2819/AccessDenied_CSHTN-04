@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="#212121">
+    android:background="#231F20">
 
     <TextView
         android:id="@+id/welcome_txt"
@@ -78,7 +78,7 @@
         android:drawablePadding="15dp"
         android:ems="10"
         android:hint="Enter password"
-        android:inputType="textEmailAddress"
+        android:inputType="text"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
     <Button
@@ -98,37 +98,52 @@
         android:text="Sign Up"
         android:textSize="20sp" />
 
+    <TextView
+        android:id="@+id/already_have_acc_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sign_up_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/corner3"
+        android:padding="2dp"
+        android:text="Click if Already have an account?"
+        android:textColor="@color/white" />
+
     <LinearLayout
         android:id="@+id/divider_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/sign_up_button"
-        android:layout_margin="20dp"
+        android:layout_below="@id/already_have_acc_txt"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         android:orientation="horizontal">
 
         <View
             android:id="@+id/dividerL"
             android:layout_width="0dp"
-            android:layout_weight="2"
             android:layout_height="3dp"
             android:layout_marginTop="18dp"
+            android:layout_weight="2"
             android:background="@color/white" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="28sp"
-            android:text="or"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:textColor="@color/white"/>
+            android:text="or"
+            android:textColor="@color/white"
+            android:textSize="28sp" />
 
         <View
             android:id="@+id/dividerR"
             android:layout_width="0dp"
-            android:layout_weight="2"
             android:layout_height="3dp"
             android:layout_marginTop="18dp"
+            android:layout_weight="2"
             android:background="@color/white" />
 
     </LinearLayout>
@@ -169,32 +184,5 @@
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="14sp" />
-
-
-
-    <TextView
-        android:id="@+id/already_have_acc_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/sign_with_facebook_button"
-        android:layout_marginTop="40dp"
-        android:text="already have an account"
-        android:textColor="@color/white" />
-
-    <Button
-        android:id="@+id/login_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/sign_with_facebook_button"
-        android:layout_alignEnd="@id/already_have_acc_txt"
-        android:layout_alignRight="@id/already_have_acc_txt"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="-101dp"
-        android:layout_marginRight="-101dp"
-        android:background="@drawable/corner3"
-        android:padding="10sp"
-        android:text="Log in"
-        android:textSize="20sp" />
 
 </RelativeLayout>
