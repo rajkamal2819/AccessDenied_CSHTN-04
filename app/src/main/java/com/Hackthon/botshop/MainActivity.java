@@ -3,8 +3,12 @@ package com.Hackthon.botshop;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -33,6 +37,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.ktx.Firebase;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Button;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.AuthResult;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 import java.util.Arrays;
 
@@ -40,21 +52,37 @@ import static android.content.ContentValues.TAG;
 import static android.provider.ContactsContract.Intents.Insert.EMAIL;
 
 public class MainActivity extends AppCompatActivity {
+    private EditText emailTextView, passwordTextView,emaillogin,passwordlogin;
+    private Button Btnsignup;
+    private Button Btnsignin;
 
     private static String LOG_TAG = MainActivity.class.getSimpleName();
-    private  GoogleSignInClient mGoogleSignInClient;
+    private GoogleSignInClient mGoogleSignInClient;
+
     private int RC_SIGN_IN = 123;
     private FirebaseAuth mAuth;
     FirebaseUser user;
     LoginButton loginButton;
+    private ProgressDialog Dialog;
     CallbackManager callbackManager;
     private Button btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 //hello
         setContentView(R.layout.activity_main);
+        emailTextView = findViewById(R.id.email_edittext);
+        passwordTextView = findViewById(R.id.password_edittext);
+        Btnsignup = findViewById(R.id.sign_up_button);
         btn = (Button)findViewById(R.id.sign_in_with_google_button);
         loginButton = (LoginButton)findViewById(R.id.sign_with_facebook_button);
+        // Set on Click Listener on Registration button
+        Btnsignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                registerNewUser();
+            }
+        });
         super.onCreate(savedInstanceState);
 
         mAuth = FirebaseAuth.getInstance();
@@ -67,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
             loginButton.setReadPermissions(Arrays.asList(EMAIL));
         }
         //else
-
 
 
 
@@ -88,6 +115,66 @@ public class MainActivity extends AppCompatActivity {
 
         Log.i(LOG_TAG,"On Create");
 
+    }
+
+    private void registerNewUser() {
+        // show the visibility of progress bar to show loading
+
+
+        // Take the value of two edit texts in Strings
+        String email, password;
+        email = emailTextView.getText().toString().trim();
+        password = passwordTextView.getText().toString().trim();
+
+        // Validations for input email and password
+        if (TextUtils.isEmpty(email)) {
+            Toast.makeText(getApplicationContext(),
+                    "Please enter email!!",
+                    Toast.LENGTH_LONG)
+                    .show();
+            return;
+        }
+        if (TextUtils.isEmpty(password)) {
+            Toast.makeText(getApplicationContext(),
+                    "Please enter password!!",
+                    Toast.LENGTH_LONG)
+                    .show();
+            return;
+        }
+
+        // create new user or register new user
+        mAuth
+                .createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(getApplicationContext(),
+                                "Registration successful!",
+                                Toast.LENGTH_LONG)
+                                .show();
+
+                        // hide the progress bar
+
+
+                        // if the user created intent to login activity
+                        Intent intent
+                                = new Intent(MainActivity.this,
+                                DomainSections.class);
+                        startActivity(intent);
+                    }
+                    else {
+
+                        // Registration failed
+                        Toast.makeText(
+                                getApplicationContext(),
+                                "Registration failed!!"
+                                        + " Please try again later",
+                                Toast.LENGTH_LONG)
+                                .show();
+
+                        // hide the progress bar
+
+                    }
+                });
     }
 
     public void buttonClickLoginFb(View v)
@@ -205,5 +292,11 @@ public class MainActivity extends AppCompatActivity {
                 });
 
         Log.i(LOG_TAG,"FireBase Auth");
+    }
+
+
+    public void LogIn(View view) {
+        Intent i = new Intent(MainActivity.this,SignIn.class);
+        startActivity(i);
     }
 }

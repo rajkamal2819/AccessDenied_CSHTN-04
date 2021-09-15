@@ -78,7 +78,7 @@
         android:drawablePadding="15dp"
         android:ems="10"
         android:hint="Enter password"
-        android:inputType="textEmailAddress"
+        android:inputType="text"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
     <Button
@@ -189,10 +189,11 @@
         android:layout_alignEnd="@id/already_have_acc_txt"
         android:layout_alignRight="@id/already_have_acc_txt"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="-101dp"
-        android:layout_marginRight="-101dp"
+        android:layout_marginTop="-121dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginRight="68dp"
         android:background="@drawable/corner3"
+        android:onClick="LogIn"
         android:padding="10sp"
         android:text="Log in"
         android:textSize="20sp" />
