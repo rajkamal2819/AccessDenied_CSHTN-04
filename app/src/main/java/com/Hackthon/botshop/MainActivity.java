@@ -96,8 +96,6 @@ public class MainActivity extends AppCompatActivity {
             loginButton.setReadPermissions(Arrays.asList(EMAIL));
         }
 
-        updateUI(userAuth.getCurrentUser());
-
          // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken("51643308532-clo824oss78abenb4o7ke5h1s3lobame.apps.googleusercontent.com")
