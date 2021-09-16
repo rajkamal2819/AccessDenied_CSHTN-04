@@ -12,5 +12,6 @@
     <color name="gray">#fafafa</color>
     <color name="start_blue">#09c6df</color>
     <color name="end_blue">#0bcce6</color>
+    <color name="navy_blue">#145DA0</color>
 
 </resources>

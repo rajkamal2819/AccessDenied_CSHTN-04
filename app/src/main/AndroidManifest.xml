@@ -16,34 +16,46 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".SignIn"
             android:label="Login"
-            android:theme="@style/login_Theme"
+            android:theme="@style/NoActionBarTheme"
             android:configChanges="locale|keyboardHidden|orientation"/>
         <activity
             android:name=".FashionDomain"
-            android:exported="true" />
+            android:exported="true"
+            android:label="Fashion"
+            android:theme="@style/DomainTheme"/>
         <activity
             android:name=".UserProfile"
-            android:exported="true" />
+            android:exported="true"
+            android:label="Profile"
+            android:theme="@style/DomainTheme"/>
         <activity
             android:name=".Others"
-            android:exported="true" />
+            android:exported="true"
+            android:label="Others"
+            android:theme="@style/DomainTheme"/>
         <activity
             android:name=".TechDomain"
-            android:exported="true" />
+            android:exported="true"
+            android:label="Technology"
+            android:theme="@style/DomainTheme"/>
         <activity
             android:name=".Sports"
-            android:exported="true" />
+            android:exported="true"
+            android:label="Sports"
+            android:theme="@style/DomainTheme"/>
         <activity
             android:name=".ChatBot"
-            android:exported="true" />
+            android:exported="true"
+            android:label="Chat With Us"
+            android:theme="@style/DomainTheme"/>
         <activity
             android:name=".DomainSections"
             android:exported="true"
-            android:theme="@style/login_Theme" />
+            android:theme="@style/NoActionBarTheme" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/login_Theme">
+            android:theme="@style/NoActionBarTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
