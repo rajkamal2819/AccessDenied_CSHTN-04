@@ -62,7 +62,7 @@ public class Users {
         this.number = number;
     }
 
-    public String getUserId() {
+    public String getUserId(String key) {
         return userId;
     }
 
