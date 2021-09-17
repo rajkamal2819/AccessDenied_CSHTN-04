@@ -15,6 +15,7 @@
         android:usesCleartextTraffic="true" >
         <activity
             android:name=".ChatDetailsActivity"
+            android:theme="@style/chatDetailsTheme"
             android:exported="true" />
         <activity
             android:name=".SignIn"
@@ -25,31 +26,37 @@
             android:name=".FashionDomain"
             android:exported="true"
             android:label="Fashion"
+            android:parentActivityName=".DomainSections"
             android:theme="@style/DomainTheme" />
         <activity
             android:name=".UserProfile"
             android:exported="true"
             android:label="Profile"
+            android:parentActivityName=".DomainSections"
             android:theme="@style/DomainTheme" />
         <activity
             android:name=".Others"
             android:exported="true"
             android:label="Others"
+            android:parentActivityName=".DomainSections"
             android:theme="@style/DomainTheme" />
         <activity
             android:name=".TechDomain"
             android:exported="true"
             android:label="Technology"
+            android:parentActivityName=".DomainSections"
             android:theme="@style/DomainTheme" />
         <activity
             android:name=".Sports"
             android:exported="true"
             android:label="Sports"
+            android:parentActivityName=".DomainSections"
             android:theme="@style/DomainTheme" />
         <activity
             android:name=".ChatBot"
             android:exported="true"
             android:label="Chat With Us"
+            android:parentActivityName=".DomainSections"
             android:theme="@style/DomainTheme" />
         <activity
             android:name=".DomainSections"
