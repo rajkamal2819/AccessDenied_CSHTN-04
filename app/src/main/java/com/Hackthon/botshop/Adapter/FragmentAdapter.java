@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.Hackthon.botshop.Fragmentss.CallsFragment;
+import com.Hackthon.botshop.Fragmentss.OnlineChatFragment;
 import com.Hackthon.botshop.Fragmentss.ChatsFragment;
 
 public class FragmentAdapter extends FragmentPagerAdapter  {
@@ -24,7 +24,7 @@ public class FragmentAdapter extends FragmentPagerAdapter  {
 
         switch (position){
             case 0: return new ChatsFragment();
-            case 1: return new CallsFragment();
+            case 1: return new OnlineChatFragment();
             default: return new ChatsFragment();
         }
     }
@@ -43,7 +43,7 @@ public class FragmentAdapter extends FragmentPagerAdapter  {
             title = "CHATS";
         }
         else if(position==1){
-            title = "CALLS";
+            title = "ONLINE";
         }
 
         return title;
