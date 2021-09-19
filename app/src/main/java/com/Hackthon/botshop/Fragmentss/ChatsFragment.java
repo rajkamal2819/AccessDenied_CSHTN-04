@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import com.Hackthon.botshop.Adapter.UserAdapter;
 import com.Hackthon.botshop.Models.Users;
 import com.Hackthon.botshop.R;
 import com.Hackthon.botshop.databinding.FragmentChatsBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -24,6 +27,8 @@ import java.util.ArrayList;
 
 
 public class ChatsFragment extends Fragment {
+
+    private static String LOG_TAG = ChatsFragment.class.getSimpleName();
 
     public ChatsFragment() {
         // Required empty public constructor
@@ -44,6 +49,9 @@ public class ChatsFragment extends Fragment {
         UserAdapter userAdapter = new UserAdapter(list,getContext());
         binding.chatRecyclerView.setAdapter(userAdapter);
 
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        Log.i(LOG_TAG,"FireBaseUI: "+firebaseUser.getUid());
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         binding.chatRecyclerView.setLayoutManager(layoutManager);
 
@@ -54,6 +62,7 @@ public class ChatsFragment extends Fragment {
                 for (DataSnapshot dataSnapshot: snapshot.getChildren()){
                     Users users = dataSnapshot.getValue(Users.class);
                     users.setUserId(dataSnapshot.getKey());
+                    Log.i(LOG_TAG,"UserId: "+users.getUserId());
                     list.add(users);
                 }
                  userAdapter.notifyDataSetChanged();
@@ -67,4 +76,5 @@ public class ChatsFragment extends Fragment {
 
         return binding.getRoot();
     }
+
 }

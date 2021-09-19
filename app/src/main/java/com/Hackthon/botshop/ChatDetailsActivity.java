@@ -10,11 +10,13 @@ import android.view.View;
 
 import com.Hackthon.botshop.Adapter.ChatAdapter;
 import com.Hackthon.botshop.Models.MessagesModels;
+import com.Hackthon.botshop.Models.Users;
 import com.Hackthon.botshop.databinding.ActivityChatDetailsBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
@@ -27,6 +29,7 @@ public class ChatDetailsActivity extends AppCompatActivity {
     private ActivityChatDetailsBinding binding;
     FirebaseDatabase database;
     FirebaseAuth auth;
+    DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +41,7 @@ public class ChatDetailsActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         final String senderId = auth.getUid();
-        String receiverId = getIntent().getStringExtra("UserId");
+         String receiverId = getIntent().getStringExtra("UserId");
         String userName = getIntent().getStringExtra("userName");
         String profilePic = getIntent().getStringExtra("profilePic");
 
@@ -82,7 +85,6 @@ public class ChatDetailsActivity extends AppCompatActivity {
 
                     }
                 });
-
 
         binding.sendArrow.setOnClickListener(new View.OnClickListener() {
             @Override
