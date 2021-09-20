@@ -4,7 +4,8 @@ import com.google.firebase.firestore.auth.User;
 
 public class Users {
 
-    String profilePic,name,emailId,password,number,userId , status;
+    String profilePic,name,emailId,password,number,userId;
+    String status;
 
     public Users(String profilePic, String name, String emailId, String password, String number, String userId) {
         this.profilePic = profilePic;

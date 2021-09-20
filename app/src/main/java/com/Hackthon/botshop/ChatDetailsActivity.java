@@ -10,7 +10,6 @@ import android.view.View;
 
 import com.Hackthon.botshop.Adapter.ChatAdapter;
 import com.Hackthon.botshop.Models.MessagesModels;
-import com.Hackthon.botshop.Models.Users;
 import com.Hackthon.botshop.databinding.ActivityChatDetailsBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -51,7 +50,7 @@ public class ChatDetailsActivity extends AppCompatActivity {
         binding.chatDetailsArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ChatDetailsActivity.this,FashionDomain.class);
+                Intent i = new Intent(ChatDetailsActivity.this, IndividualChatsDomain.class);
                 startActivity(i);
             }
         });

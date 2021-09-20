@@ -28,6 +28,7 @@ public class ChatAdapter extends RecyclerView.Adapter{
         this.context = context;
     }
 
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

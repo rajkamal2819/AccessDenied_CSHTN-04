@@ -52,13 +52,14 @@ public class AlreadyChatted extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentChatsBinding.inflate(inflater, container, false);
-       // database = FirebaseDatabase.getInstance();
+        database = FirebaseDatabase.getInstance();
 
          userAdapter = new UserAdapter(list,getContext());
         binding.chatRecyclerView.setAdapter(userAdapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         binding.chatRecyclerView.setLayoutManager(layoutManager);
+
 
         fUser = FirebaseAuth.getInstance().getCurrentUser();
         userList = new ArrayList<>();
@@ -71,10 +72,7 @@ public class AlreadyChatted extends Fragment {
                     Users users = dataSnapshot.getValue(Users.class);
                     users.setUserId(dataSnapshot.getKey());
                     String room = users.getUserId()+fUser.getUid();
-                    String room1 = fUser.getUid()+users.getUserId();
                     Log.i(LOG_TAG,"room: "+room);
-                    /*Log.i(LOG_TAG,"room1: "+room1);
-                    Log.i(LOG_TAG,"USER : "+users.getUserId());*/
                     FirebaseDatabase.getInstance().getReference().child("Chats").addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -85,10 +83,6 @@ public class AlreadyChatted extends Fragment {
                                      list.add(users);
                                  }
                              }
-                            /* if (dataSnapshot1.getKey().equals(room1)) {
-                                 list.add(users);
-                                 Log.i(LOG_TAG,"added User: "+users.getUserId()+" with room: "+room1);
-                             }*/
                          }
                             userAdapter.notifyDataSetChanged();
                         }
@@ -107,6 +101,29 @@ public class AlreadyChatted extends Fragment {
 
             }
         });
+
+         /*
+        reference = FirebaseDatabase.getInstance().getReference();
+        reference.child("Presence").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                    String key = dataSnapshot.getKey();
+                    for (Users user: list){
+                        if(key.equals(user.getUserId())){
+                            Log.i(LOG_TAG,"Presence of: "+user.getName());
+                            user.setStatus(true);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });*/
 
         return binding.getRoot();
 

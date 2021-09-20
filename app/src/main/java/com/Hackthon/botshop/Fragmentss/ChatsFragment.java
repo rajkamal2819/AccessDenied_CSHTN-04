@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.Hackthon.botshop.Adapter.UserAdapter;
 import com.Hackthon.botshop.Models.Users;
@@ -37,6 +38,7 @@ public class ChatsFragment extends Fragment {
     FragmentChatsBinding binding;
     ArrayList<Users> list = new ArrayList<>();
     FirebaseDatabase database;
+    ImageView img_online;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,6 +47,7 @@ public class ChatsFragment extends Fragment {
         binding = FragmentChatsBinding.inflate(inflater, container, false);
 
         database = FirebaseDatabase.getInstance();
+        img_online = container.findViewById(R.id.img_online);
 
         UserAdapter userAdapter = new UserAdapter(list,getContext());
         binding.chatRecyclerView.setAdapter(userAdapter);
@@ -63,9 +66,10 @@ public class ChatsFragment extends Fragment {
                     Users users = dataSnapshot.getValue(Users.class);
                     users.setUserId(dataSnapshot.getKey());
                     Log.i(LOG_TAG,"UserId: "+users.getUserId());
+                   // users.setStatus(false);
                     list.add(users);
                 }
-                 userAdapter.notifyDataSetChanged();
+                userAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -73,6 +77,27 @@ public class ChatsFragment extends Fragment {
 
             }
         });
+
+        /*database.getReference().child("Presence").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                    String key = dataSnapshot.getKey();
+                    for (Users user: list){
+                        if(key.equals(user.getUserId())){
+                            Log.i(LOG_TAG,"Presence of: "+user.getName());
+                            user.setStatus(true);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });*/
 
         return binding.getRoot();
     }

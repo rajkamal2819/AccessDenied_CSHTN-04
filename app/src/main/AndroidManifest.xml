@@ -13,7 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BotShop"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MainActivity2"></activity>
         <activity
             android:name=".ChatDetailsActivity"
             android:exported="true"
@@ -24,9 +23,9 @@
             android:label="Login"
             android:theme="@style/NoActionBarTheme" />
         <activity
-            android:name=".FashionDomain"
+            android:name=".IndividualChatsDomain"
             android:exported="true"
-            android:label="Fashion"
+            android:label="Individual Chats"
             android:parentActivityName=".DomainSections"
             android:theme="@style/DomainTheme" />
         <activity
@@ -36,9 +35,9 @@
             android:parentActivityName=".DomainSections"
             android:theme="@style/DomainTheme" />
         <activity
-            android:name=".Others"
+            android:name=".FashionDomain"
             android:exported="true"
-            android:label="Others"
+            android:label="Fashion"
             android:parentActivityName=".DomainSections"
             android:theme="@style/DomainTheme" />
         <activity
