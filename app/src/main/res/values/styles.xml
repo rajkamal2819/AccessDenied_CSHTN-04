@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="login_Theme" parent="Theme.AppCompat.Light.NoActionBar">
-
+    <style name="NoActionBarTheme" parent="Theme.AppCompat.Light.NoActionBar">
     </style>
+
+    <style name="chatDetailsTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+    </style>
+
+    <style name="DomainTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/navy_blue</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+    </style>
+
+
+
     <style name="CustomDialogTheme" parent="@android:style/Theme.Dialog">
         <item name="android:bottomBright">#fff</item>
         <item name="android:bottomDark">#fff</item>
@@ -15,6 +26,7 @@
         <item name="android:fullDark">#7D266A</item>
         <item name="android:topBright">#2f6699</item>
         <item name="android:topDark">#2f6699</item></style>
+
     </resources>
 
 

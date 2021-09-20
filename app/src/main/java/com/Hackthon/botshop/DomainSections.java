@@ -6,18 +6,24 @@ import androidx.cardview.widget.CardView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class DomainSections extends AppCompatActivity {
 
     CardView fashion;
     CardView sports;
-    CardView others;
+    CardView individual;
     CardView tech;
     CardView chatBot;
     CardView user;
+
+    FirebaseUser firebaseUser;
+    DatabaseReference refer;
+    FirebaseDatabase database;
 
 
     @Override
@@ -25,9 +31,9 @@ public class DomainSections extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_domain_sections);
 
-        fashion = findViewById(R.id.fashion_domain);
+        individual = findViewById(R.id.indiviual_chat_domain);
         sports = findViewById(R.id.sports_domain);
-        others = findViewById(R.id.other_domain);
+        fashion = findViewById(R.id.fashion_domain);
         tech = findViewById(R.id.tech_domain);
         chatBot = findViewById(R.id.chat_bot_domain);
         user = findViewById(R.id.user_domain);
@@ -57,10 +63,10 @@ public class DomainSections extends AppCompatActivity {
             }
         });
 
-        others.setOnClickListener(new View.OnClickListener() {
+        fashion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(DomainSections.this,Others.class);
+                Intent i = new Intent(DomainSections.this, FashionDomain.class);
                 startActivity(i);
             }
         });
@@ -73,13 +79,58 @@ public class DomainSections extends AppCompatActivity {
             }
         });
 
-        fashion.setOnClickListener(new View.OnClickListener() {
+        individual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(DomainSections.this,FashionDomain.class);
+                Intent i = new Intent(DomainSections.this, IndividualChatsDomain.class);
                 startActivity(i);
             }
         });
 
+    }
+
+    /*private void status(String status){
+
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        refer = FirebaseDatabase.getInstance().getReference("Users");
+        refer.child(firebaseUser.getUid());
+        HashMap<String,Object> hashMap = new HashMap<>();
+        hashMap.put("status",status);
+
+        refer.updateChildren(hashMap);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        status("Online");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        status("Offline");
+    }*/
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        String currId = FirebaseAuth.getInstance().getUid();
+        database = FirebaseDatabase.getInstance();
+        database.getReference().child("Presence").child(currId).setValue("Online");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        String currId = FirebaseAuth.getInstance().getUid();
+        database = FirebaseDatabase.getInstance();
+        database.getReference().child("Presence").child(currId).setValue("Offline");
+    }
+
+    @Override
+    public void onBackPressed() {
+        finishAffinity();
+        super.onBackPressed();
     }
 }

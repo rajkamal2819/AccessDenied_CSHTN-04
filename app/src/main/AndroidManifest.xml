@@ -10,41 +10,63 @@
         android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/Theme.BotShop"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-
+        android:theme="@style/Theme.BotShop"
         android:usesCleartextTraffic="true">
-        <activity android:name=".SignIn"
-            android:label="Login"
-
-            android:configChanges="locale|keyboardHidden|orientation"/>
         <activity
-            android:name=".FashionDomain"
-            android:exported="true" />
+            android:name=".ChatDetailsActivity"
+            android:exported="true"
+            android:theme="@style/chatDetailsTheme" />
+        <activity
+            android:name=".SignIn"
+            android:configChanges="locale|keyboardHidden|orientation"
+            android:label="Login"
+            android:theme="@style/NoActionBarTheme" />
+        <activity
+            android:name=".IndividualChatsDomain"
+            android:exported="true"
+            android:label="Individual Chats"
+            android:parentActivityName=".DomainSections"
+            android:theme="@style/DomainTheme" />
         <activity
             android:name=".UserProfile"
-            android:exported="true" />
+            android:exported="true"
+            android:label="Profile"
+            android:parentActivityName=".DomainSections"
+            android:theme="@style/DomainTheme" />
         <activity
-            android:name=".Others"
-            android:exported="true" />
+            android:name=".FashionDomain"
+            android:exported="true"
+            android:label="Fashion"
+            android:parentActivityName=".DomainSections"
+            android:theme="@style/DomainTheme" />
         <activity
             android:name=".TechDomain"
-            android:exported="true" />
+            android:exported="true"
+            android:label="Technology"
+            android:parentActivityName=".DomainSections"
+            android:theme="@style/DomainTheme" />
         <activity
             android:name=".Sports"
-            android:exported="true" />
+            android:exported="true"
+            android:label="Sports"
+            android:parentActivityName=".DomainSections"
+            android:theme="@style/DomainTheme" />
         <activity
             android:name=".ChatBot"
-            android:exported="true" />
+            android:exported="true"
+            android:label="Chat With Us"
+            android:parentActivityName=".DomainSections"
+            android:theme="@style/DomainTheme" />
         <activity
             android:name=".DomainSections"
             android:exported="true"
-            android:theme="@style/login_Theme" />
+            android:theme="@style/NoActionBarTheme" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/login_Theme">
+            android:theme="@style/NoActionBarTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
