@@ -1,4 +1,4 @@
-package com.Hackthon.botshop.Adapter;
+package com.Hackthon.botshop.AdapterModels;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

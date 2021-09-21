@@ -11,10 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.Hackthon.botshop.Adapter.UserAdapter;
-import com.Hackthon.botshop.Models.MessagesModels;
+import com.Hackthon.botshop.AdapterModels.UserAdapter;
 import com.Hackthon.botshop.Models.Users;
-import com.Hackthon.botshop.R;
 import com.Hackthon.botshop.databinding.FragmentChatsBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,7 +21,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.auth.User;
 
 import java.util.ArrayList;
 import java.util.List;

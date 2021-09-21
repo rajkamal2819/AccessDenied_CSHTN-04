@@ -21,17 +21,31 @@
         android:minHeight="30dp">
 
         <TextView
+            android:id="@+id/userName_sender_textview_group_chat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="5dp"
+            android:text="userName"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/sender_textviewGroup"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
             android:id="@+id/sender_textviewGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="2dp"
-            android:layout_marginTop="5dp"
-            android:padding="2dp"
             android:inputType="textLongMessage|textMultiLine"
             android:maxWidth="270dp"
             android:minWidth="50dp"
+            android:padding="2dp"
             android:text="TextView"
             app:layout_constraintBottom_toTopOf="@+id/sendersTimeGroup"
             app:layout_constraintEnd_toEndOf="parent"

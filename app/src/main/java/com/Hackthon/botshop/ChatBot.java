@@ -21,6 +21,11 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.Hackthon.botshop.Adapter;
+import com.Hackthon.botshop.BotMessage;
+import com.Hackthon.botshop.ClickListener;
+import com.Hackthon.botshop.R;
+import com.Hackthon.botshop.RecyclerTouchListener;
 import com.ibm.cloud.sdk.core.http.HttpMediaType;
 import com.ibm.cloud.sdk.core.security.IamAuthenticator;
 import com.ibm.watson.assistant.v1.Assistant;
@@ -49,8 +54,8 @@ public class ChatBot extends AppCompatActivity {
     private TextToSpeech textToSpeech;
     private SpeechToText speechService;
     private MicrophoneHelper microphoneHelper;
-   private ArrayList messageArrayList;
-   private RecyclerView recyclerView;
+    private ArrayList messageArrayList;
+    private RecyclerView recyclerView;
     private Adapter adapter;
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
     private static final int RECORD_REQUEST_CODE = 101;
@@ -70,13 +75,13 @@ public class ChatBot extends AppCompatActivity {
             watsonAssistant.setServiceUrl(context.getString(R.string.assistant_url));
 
 
-    textToSpeech=new com.ibm.watson.text_to_speech.v1.TextToSpeech(new IamAuthenticator(context.getString(R.string.TTS_apikey)));
-            textToSpeech.setServiceUrl(context.getString(R.string.TTS_url));
+        textToSpeech=new com.ibm.watson.text_to_speech.v1.TextToSpeech(new IamAuthenticator(context.getString(R.string.TTS_apikey)));
+        textToSpeech.setServiceUrl(context.getString(R.string.TTS_url));
 
 
-            speechService = new SpeechToText(new IamAuthenticator(context.getString(R.string.STT_apikey)));
-            speechService.setServiceUrl(context.getString(R.string.STT_url));
-        }
+        speechService = new SpeechToText(new IamAuthenticator(context.getString(R.string.STT_apikey)));
+        speechService.setServiceUrl(context.getString(R.string.STT_url));
+    }
 
 
     @Override
@@ -84,7 +89,7 @@ public class ChatBot extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_bot);
 
-             //this is changes made by me and for si
+        //this is changes made by me and for si
 
         context=getApplicationContext();
 
@@ -151,14 +156,14 @@ public class ChatBot extends AppCompatActivity {
     }
 
     private void sendMessage() {
-     final String inputMessage=this.inputMessage.getText().toString().trim();
+        final String inputMessage=this.inputMessage.getText().toString().trim();
 
 
 
 
     }
 
-            //method returns true or false based on users connection status
+    //method returns true or false based on users connection status
     private boolean checkInternetConnection() {
 
         ConnectivityManager cm=(ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -296,10 +301,10 @@ public class ChatBot extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
             streamPlayer.playStream(textToSpeech.synthesize(new SynthesizeOptions.Builder()
-            .text(strings[0])
-            .voice(SynthesizeOptions.Voice.EN_GB_KATEV3VOICE)
-            .accept(HttpMediaType.AUDIO_WAV)
-            .build()).execute().getResult());
+                    .text(strings[0])
+                    .voice(SynthesizeOptions.Voice.EN_GB_KATEV3VOICE)
+                    .accept(HttpMediaType.AUDIO_WAV)
+                    .build()).execute().getResult());
 
             return "Synthesised successfully";
         }
@@ -314,6 +319,4 @@ public class ChatBot extends AppCompatActivity {
             }
         });
     }
-    }
-
-
+}

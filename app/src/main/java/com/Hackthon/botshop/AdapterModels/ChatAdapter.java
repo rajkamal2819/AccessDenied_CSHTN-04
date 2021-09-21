@@ -1,4 +1,4 @@
-package com.Hackthon.botshop.Adapter;
+package com.Hackthon.botshop.AdapterModels;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -78,8 +78,8 @@ public class ChatAdapter extends RecyclerView.Adapter{
         public ReceiverViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            receiverMsg = itemView.findViewById(R.id.reciever_textview);
-            receiverTime = itemView.findViewById(R.id.receiverTime);
+            receiverMsg = itemView.findViewById(R.id.reciever_textviewGroup);
+            receiverTime = itemView.findViewById(R.id.receiverTimeGroup);
 
         }
     }
@@ -91,8 +91,8 @@ public class ChatAdapter extends RecyclerView.Adapter{
         public SendersViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            sendersMsg = itemView.findViewById(R.id.sender_textview);
-            sendersTime = itemView.findViewById(R.id.sendersTime);
+            sendersMsg = itemView.findViewById(R.id.sender_textviewGroup);
+            sendersTime = itemView.findViewById(R.id.sendersTimeGroup);
 
         }
 

@@ -1,8 +1,7 @@
-package com.Hackthon.botshop.Adapter;
+package com.Hackthon.botshop.AdapterModels;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.Hackthon.botshop.ChatDetailsActivity;
 import com.Hackthon.botshop.Models.Users;
 import com.Hackthon.botshop.R;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

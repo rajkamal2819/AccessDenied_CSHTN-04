@@ -4,6 +4,7 @@ public class MessagesModels {
 
     String uId , message;
     Long timestamp;
+    String senderName , receiverName;
 
     public MessagesModels(String uId, String message, Long timestamp) {
         this.uId = uId;
@@ -20,6 +21,30 @@ public class MessagesModels {
 
     public String getuId() {
         return uId;
+    }
+
+    public MessagesModels(String uId, String message, Long timestamp, String senderName, String receiverName) {
+        this.uId = uId;
+        this.message = message;
+        this.timestamp = timestamp;
+        this.senderName = senderName;
+        this.receiverName = receiverName;
+    }
+
+    public String getSenderName() {
+        return senderName;
+    }
+
+    public void setSenderName(String senderName) {
+        this.senderName = senderName;
+    }
+
+    public String getReceiverName() {
+        return receiverName;
+    }
+
+    public void setReceiverName(String receiverName) {
+        this.receiverName = receiverName;
     }
 
     public void setuId(String uId) {

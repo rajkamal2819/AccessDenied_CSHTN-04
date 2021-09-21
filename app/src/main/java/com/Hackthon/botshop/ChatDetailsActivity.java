@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.Hackthon.botshop.Adapter.ChatAdapter;
+import com.Hackthon.botshop.AdapterModels.ChatAdapter;
 import com.Hackthon.botshop.Models.MessagesModels;
 import com.Hackthon.botshop.databinding.ActivityChatDetailsBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -47,7 +47,7 @@ public class ChatDetailsActivity extends AppCompatActivity {
         binding.chatDetailsUserName.setText(userName);
         Picasso.get().load(profilePic).placeholder(R.drawable.user_profile_img).into(binding.chatDetailsProfilePic);
 
-        binding.chatDetailsArrow.setOnClickListener(new View.OnClickListener() {
+        binding.chatbackArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(ChatDetailsActivity.this, IndividualChatsDomain.class);
