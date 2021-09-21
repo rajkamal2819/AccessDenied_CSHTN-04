@@ -79,7 +79,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:19.2.0'
     apply plugin: 'com.google.gms.google-services'
 
-
+    implementation 'com.google.firebase:firebase-storage'
     implementation 'com.google.firebase:firebase-database:20.0.2'
 //UMq935AmlbDnGZHQTgHPrGWJc0AECCu74UELgBvBxJpz
 

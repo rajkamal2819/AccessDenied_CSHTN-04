@@ -5,11 +5,18 @@ public class MessagesModels {
     String uId , message;
     Long timestamp;
     String senderName , receiverName;
+    String imageUrl;
 
     public MessagesModels(String uId, String message, Long timestamp) {
         this.uId = uId;
         this.message = message;
         this.timestamp = timestamp;
+    }
+    public MessagesModels(String uId, String message, Long timestamp,String imageUrl) {
+        this.uId = uId;
+        this.message = message;
+        this.timestamp = timestamp;
+        this.imageUrl = imageUrl;
     }
 
     public MessagesModels(String uId, String message) {
@@ -18,6 +25,14 @@ public class MessagesModels {
     }
 
     public MessagesModels(){}
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
     public String getuId() {
         return uId;

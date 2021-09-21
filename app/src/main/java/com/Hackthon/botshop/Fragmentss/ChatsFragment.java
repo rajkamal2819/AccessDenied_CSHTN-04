@@ -79,27 +79,6 @@ public class ChatsFragment extends Fragment {
             }
         });
 
-        /*database.getReference().child("Presence").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot: snapshot.getChildren()){
-                    String key = dataSnapshot.getKey();
-                    for (Users user: list){
-                        if(key.equals(user.getUserId())){
-                            Log.i(LOG_TAG,"Presence of: "+user.getName());
-                            user.setStatus(true);
-                            break;
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });*/
-
         return binding.getRoot();
     }
 
