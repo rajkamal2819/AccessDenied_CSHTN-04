@@ -1,33 +1,48 @@
 package com.Hackthon.botshop;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.Hackthon.botshop.AdapterModels.ChatAdapter;
+import com.Hackthon.botshop.AdapterModels.GroupChatAdapter;
+import com.Hackthon.botshop.Models.AllMethods;
+import com.Hackthon.botshop.Models.GroupMessage;
 import com.Hackthon.botshop.Models.MessagesModels;
+import com.Hackthon.botshop.Models.Users;
 import com.Hackthon.botshop.databinding.ActivityFashionBinding;
+import com.Hackthon.botshop.databinding.ActivitySportsBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class FashionDomain extends AppCompatActivity {
 
     ActivityFashionBinding binding;
-    TextView receiverGroupChatName;
-    TextView senderGroupChatName;
+    FirebaseAuth auth;
+    FirebaseDatabase database;
+    DatabaseReference reference;
+    List<GroupMessage> list;
+    Users users;
+    GroupChatAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +50,13 @@ public class FashionDomain extends AppCompatActivity {
         binding = ActivityFashionBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        auth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+        list = new ArrayList<>();
+        users = new Users();
+
         getSupportActionBar().hide();
+        binding.chatDetailsUserName.setText("Fashion");
 
         binding.chatbackArrow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,30 +66,67 @@ public class FashionDomain extends AppCompatActivity {
             }
         });
 
-        senderGroupChatName = findViewById(R.id.userName_sender_textview_group_chat);
-        receiverGroupChatName = findViewById(R.id.userName_receiver_textview_group_chat);
+        final  FirebaseUser firebaseUser = auth.getCurrentUser();
+        users.setUserId(firebaseUser.getUid());
+        users.setEmailId(firebaseUser.getEmail());
 
-        String senderId = FirebaseAuth.getInstance().getUid();
-        binding.chatDetailsUserName.setText("Fashion Room");
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
-        final FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        final ArrayList<MessagesModels> messagesModels = new ArrayList<>();
-        final ChatAdapter chatAdapter = new ChatAdapter(messagesModels, this);
-
-        binding.chatRecyclerView.setAdapter(chatAdapter);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        binding.chatRecyclerView.setLayoutManager(layoutManager);
-
-        firebaseDatabase.getReference().child("Fashion Room").addValueEventListener(new ValueEventListener() {
+        database.getReference("Users").child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                messagesModels.clear();
-                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-                    MessagesModels models = snapshot1.getValue(MessagesModels.class);
-                    messagesModels.add(models);
+                users = snapshot.getValue(Users.class);
+                users.setUserId(firebaseUser.getUid());
+                AllMethods.name = users.getName();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        reference = database.getReference("messagesFashion");
+        reference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                GroupMessage message = snapshot.getValue(GroupMessage.class);
+                message.setKey(snapshot.getKey());
+                list.add(message);
+                displayMessages(list);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                GroupMessage message = snapshot.getValue(GroupMessage.class);
+                message.setKey(snapshot.getKey());
+                List<GroupMessage> l = new ArrayList<>();
+                for (GroupMessage m : list) {
+                    if (m.getKey().equals(message.getKey())) {
+                        l.add(message);
+                    } else {
+                        l.add(m);
+                    }
                 }
-                chatAdapter.notifyDataSetChanged();
+                list = l;
+                displayMessages(list);
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+                GroupMessage message = snapshot.getValue(GroupMessage.class);
+                message.setKey(snapshot.getKey());
+                List<GroupMessage> l = new ArrayList<>();
+                for (GroupMessage m : list) {
+                    if (m.getKey().equals(message.getKey())) {
+                        l.add(m);
+                    }
+                }
+                list = l;
+                displayMessages(list);
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
             }
 
             @Override
@@ -80,73 +138,30 @@ public class FashionDomain extends AppCompatActivity {
         binding.sendArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String message = binding.sendMessageEdittext.getText().toString();
-                MessagesModels models = new MessagesModels(senderId, message);
-                models.setTimestamp(new Date().getTime());
-                binding.sendMessageEdittext.setText("");
-                //models.setSenderName(firebaseUser.getDisplayName());
-
-                firebaseDatabase.getReference().child("Fashion Room")
-                        .push()
-                        .setValue(models).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-
-                    }
-                });
-
+                if(!TextUtils.isEmpty(binding.sendMessageEdittext.toString())){
+                    GroupMessage message = new GroupMessage(binding.sendMessageEdittext.getText().toString(), users.getName());
+                    binding.sendMessageEdittext.setText("");
+                    reference.push().setValue(message);
+                }else {
+                    Toast.makeText(getApplicationContext(),"Blank Messages are not allowed",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
-        /*binding.sendArrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                final String message = binding.sendMessageEdittext.getText().toString();
-                MessagesModels models = new MessagesModels(senderId, message);
-                models.setTimestamp(new Date().getTime());
-                binding.sendMessageEdittext.setText("");
+    }
 
-                *//*firebaseDatabase.getReference().child("Chats")
-                        .child(senderRoom)
-                        .push()
-                        .setValue(messagesModels1).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
+    private void displayMessages(List<GroupMessage> list) {
 
-                        database.getReference().child("Chats")
-                                .child(receiverRoom)
-                                .push()
-                                .setValue(messagesModels1).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
+        binding.chatRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new GroupChatAdapter(FashionDomain.this, list, reference);
+        binding.chatRecyclerView.setAdapter(adapter);
 
-                            }
-                        });*//*
+    }
 
-
-                firebaseDatabase.getReference().child("Users").addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                               String senderRoom = firebaseUser.getUid() + dataSnapshot.getKey();
-                               firebaseDatabase.getReference().child(senderRoom){
-
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
-            }
-        });*/
-
-
-
-     }
-
-
+    @Override
+    protected void onResume() {
+        list = new ArrayList<>();
+        super.onResume();
+    }
 }

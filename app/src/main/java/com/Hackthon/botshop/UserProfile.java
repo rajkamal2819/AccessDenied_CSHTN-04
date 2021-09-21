@@ -13,11 +13,15 @@ public class UserProfile extends AppCompatActivity {
 
     LinearLayout editProfile;
     LinearLayout signOut;
+    FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
+
+        auth = FirebaseAuth.getInstance();
+
 
         editProfile = (LinearLayout) findViewById(R.id.edit_user_profile_layout);
         editProfile.setOnClickListener(new View.OnClickListener() {
@@ -32,7 +36,7 @@ public class UserProfile extends AppCompatActivity {
         signOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
+               auth.signOut();
                 Intent i = new Intent(UserProfile.this,MainActivity.class);
                 startActivity(i);
             }
