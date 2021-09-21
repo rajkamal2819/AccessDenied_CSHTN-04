@@ -156,6 +156,7 @@ public class FashionDomain extends AppCompatActivity {
         binding.chatRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new GroupChatAdapter(FashionDomain.this, list, reference);
         binding.chatRecyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
     }
 

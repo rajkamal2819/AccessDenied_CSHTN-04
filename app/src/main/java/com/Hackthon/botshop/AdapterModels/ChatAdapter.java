@@ -11,9 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.Hackthon.botshop.Models.MessagesModels;
 import com.Hackthon.botshop.R;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ChatAdapter extends RecyclerView.Adapter{
 
@@ -48,9 +52,16 @@ public class ChatAdapter extends RecyclerView.Adapter{
 
         if(holder.getClass() == SendersViewHolder.class){
             ((SendersViewHolder)holder).sendersMsg.setText(msgModels.getMessage());
+            Date date=new Date(msgModels.getTimestamp());
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("h:mm a");
+            ((SendersViewHolder)holder).sendersTime.setText(simpleDateFormat.format(date));
         }
         else{
             ((ReceiverViewHolder)holder).receiverMsg.setText(msgModels.getMessage());
+            Time time=new Time(msgModels.getTimestamp());
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("h:mm a");
+            ((ReceiverViewHolder)holder).receiverTime.setText(simpleDateFormat.format(time));
+
         }
 
     }

@@ -154,6 +154,7 @@ public class Sports extends AppCompatActivity {
         binding.chatRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new GroupChatAdapter(Sports.this, list, reference);
         binding.chatRecyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
     }
 

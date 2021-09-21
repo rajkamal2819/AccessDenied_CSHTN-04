@@ -55,10 +55,12 @@ public class GroupChatAdapter extends RecyclerView.Adapter<GroupChatAdapter.Grou
         if (holder.getItemViewType()==SENDER_VIEW_TYPE) {
             holder.tvTitle.setText("YOU: " + message.getMessage());
             holder.tvTitle.setGravity(Gravity.START);
+            holder.time.setVisibility(View.GONE);
             /*holder.constraintLayout.setBackgroundColor(Color.parseColor("#ADD8E6"));*/
         } else {
             holder.tvTitleRec.setText(message.getName() + ": " + message.getMessage());
             holder.tvTitleRec.setGravity(Gravity.START);
+            holder.timeRec.setVisibility(View.GONE);
             //holder.constraintLayout.setBackgroundColor(Color.parseColor("#FFFFFF"));
 
         }
@@ -85,6 +87,8 @@ public class GroupChatAdapter extends RecyclerView.Adapter<GroupChatAdapter.Grou
         ConstraintLayout constraintLayout;
         TextView tvTitleRec;
         ConstraintLayout constraintLayoutRec;
+        TextView time;
+        TextView timeRec;
 
         public GroupChatAdapterViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -93,6 +97,8 @@ public class GroupChatAdapter extends RecyclerView.Adapter<GroupChatAdapter.Grou
             constraintLayout = itemView.findViewById(R.id.sender_constraint_Layout);
             tvTitleRec = itemView.findViewById(R.id.reciever_textviewGroup);
             constraintLayoutRec = itemView.findViewById(R.id.receiver_constraint_layout);
+            time = itemView.findViewById(R.id.sendersTimeGroup);
+            timeRec = itemView.findViewById(R.id.receiverTimeGroup);
 
 
         }

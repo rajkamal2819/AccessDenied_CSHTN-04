@@ -151,6 +151,7 @@ public class TechDomain extends AppCompatActivity {
         binding.chatRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new GroupChatAdapter(TechDomain.this, list, reference);
         binding.chatRecyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
     }
 

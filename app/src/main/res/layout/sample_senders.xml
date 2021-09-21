@@ -26,13 +26,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="2dp"
-            android:layout_marginTop="5dp"
-            android:padding="2dp"
             android:inputType="textLongMessage|textMultiLine"
             android:maxWidth="270dp"
             android:minWidth="50dp"
+            android:padding="2dp"
             android:text="TextView"
             app:layout_constraintBottom_toTopOf="@+id/sendersTimeGroup"
             app:layout_constraintEnd_toEndOf="parent"
@@ -50,6 +50,7 @@
             android:textSize="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
