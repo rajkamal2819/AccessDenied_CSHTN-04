@@ -1,9 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditProfile">
+    android:id="@+id/relativeLayout"
+    tools:context=".EditProfile"
+    android:background="@color/primary_dark">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/backArrow"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        app:srcCompat="@drawable/ic_action_arrow"
+        app:tint="@color/white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/backArrow"
+        android:id="@+id/linearLayout1"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/editProfilePhoto"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/user_profile_img" />
+
+        <ImageView
+            android:id="@+id/add_circle"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="-30dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/add_circle" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="2dp"
+                android:text="User Name"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editProfileUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="Enter User name"
+                android:inputType="textPersonName"
+                android:padding="5dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="2dp"
+                android:text="Description"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editProfileStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="Enter Description"
+                android:inputType="textPersonName"
+                android:padding="5dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:text="Save" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>
