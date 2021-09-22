@@ -11,28 +11,35 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.Hackthon.botshop.Adapter;
-import com.Hackthon.botshop.BotMessage;
-import com.Hackthon.botshop.ClickListener;
-import com.Hackthon.botshop.R;
-import com.Hackthon.botshop.RecyclerTouchListener;
+import com.google.firebase.database.annotations.NotNull;
 import com.ibm.cloud.sdk.core.http.HttpMediaType;
+import com.ibm.cloud.sdk.core.http.Response;
+import com.ibm.cloud.sdk.core.http.ServiceCall;
 import com.ibm.cloud.sdk.core.security.IamAuthenticator;
-import com.ibm.watson.assistant.v1.Assistant;
+import com.ibm.watson.assistant.v2.model.DialogNodeOutputOptionsElement;
+import com.ibm.watson.assistant.v2.model.RuntimeResponseGeneric;
 import com.ibm.watson.developer_cloud.android.library.audio.MicrophoneHelper;
 import com.ibm.watson.developer_cloud.android.library.audio.MicrophoneInputStream;
 import com.ibm.watson.developer_cloud.android.library.audio.StreamPlayer;
 import com.ibm.watson.developer_cloud.android.library.audio.utils.ContentType;
+import com.ibm.watson.assistant.v2.Assistant;
+import com.ibm.watson.assistant.v2.model.CreateSessionOptions;
+import com.ibm.watson.assistant.v2.model.MessageInput;
+import com.ibm.watson.assistant.v2.model.MessageOptions;
+import com.ibm.watson.assistant.v2.model.MessageResponse;
+import com.ibm.watson.assistant.v2.model.SessionResponse;
 import com.ibm.watson.speech_to_text.v1.SpeechToText;
 import com.ibm.watson.speech_to_text.v1.model.RecognizeOptions;
 import com.ibm.watson.speech_to_text.v1.model.RecognizeWithWebsocketsOptions;
@@ -41,38 +48,40 @@ import com.ibm.watson.speech_to_text.v1.websocket.BaseRecognizeCallback;
 import com.ibm.watson.text_to_speech.v1.TextToSpeech;
 import com.ibm.watson.text_to_speech.v1.model.SynthesizeOptions;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ChatBot extends AppCompatActivity {
 
-    StreamPlayer streamPlayer=new StreamPlayer();
-    private Context context;
-    Assistant watsonAssistant;
-    private TextToSpeech textToSpeech;
-    private SpeechToText speechService;
-    private MicrophoneHelper microphoneHelper;
-    private ArrayList messageArrayList;
+
     private RecyclerView recyclerView;
-    private Adapter adapter;
-    private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
-    private static final int RECORD_REQUEST_CODE = 101;
-    private boolean permissionToRecordAccepted = false;
+    private ChatAdapter mAdapter;
+    private ArrayList messageArrayList;
     private EditText inputMessage;
-    private boolean initialRequest;
-    private static String TAG="MainActivity";
-    private boolean listening=false;
     private ImageButton btnSend;
     private ImageButton btnRecord;
+    StreamPlayer streamPlayer = new StreamPlayer();
+    private boolean initialRequest;
+    private boolean permissionToRecordAccepted = false;
+    private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
+    private static String TAG = "MainActivity";
+    private static final int RECORD_REQUEST_CODE = 101;
+    private boolean listening = false;
     private MicrophoneInputStream capture;
+    private Context  context;
+    private MicrophoneHelper microphoneHelper;
+
+    private Assistant watsonAssistant;
+    private Response<SessionResponse> watsonAssistantSession;
+    private SpeechToText speechService;
+    private TextToSpeech textToSpeech;
 
 
 
     private void createServices(){
-            watsonAssistant=new Assistant("2021-06-14",new IamAuthenticator(context.getString(R.string.assistant_apikey)));
-            watsonAssistant.setServiceUrl(context.getString(R.string.assistant_url));
+        watsonAssistant=new Assistant("2021-06-14",new IamAuthenticator(context.getString(R.string.assistant_apikey)));
+        watsonAssistant.setServiceUrl(context.getString(R.string.assistant_url));
 
 
         textToSpeech=new com.ibm.watson.text_to_speech.v1.TextToSpeech(new IamAuthenticator(context.getString(R.string.TTS_apikey)));
@@ -89,6 +98,12 @@ public class ChatBot extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_bot);
 
+
+        inputMessage = findViewById(R.id.message);
+        btnSend = findViewById(R.id.btn_send);
+        btnRecord = findViewById(R.id.btn_record);
+
+        recyclerView = findViewById(R.id.recycler_view);
         //this is changes made by me and for si
 
         context=getApplicationContext();
@@ -96,22 +111,22 @@ public class ChatBot extends AppCompatActivity {
         //creating a message arraylist to store messages and providing the adapter class with the messagearraylist as object for the constructor
 
         messageArrayList=new ArrayList<>();
-        adapter=new Adapter(messageArrayList);
+        mAdapter=new ChatAdapter(messageArrayList);
 
 
         //Small helper class to sit in between the client and the more in-depth microphone classes
         microphoneHelper=new MicrophoneHelper(this);
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
+        LinearLayoutManager layoutManager=new LinearLayoutManager(this);
 
         //usages doubt
-        linearLayoutManager.setStackFromEnd(true);
-
+        layoutManager.setStackFromEnd(true);
+        recyclerView.setAdapter(mAdapter);
         //setting the recycler view with a linear layout fashion
-        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setLayoutManager(layoutManager);
         //providing animations
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        recyclerView.setAdapter(adapter);
+
 
         //initialising the textmessage as an empty string and the initial request as true and changing it accordingly to switch between user and bot;
         this.inputMessage.setText("");
@@ -123,7 +138,7 @@ public class ChatBot extends AppCompatActivity {
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(),recyclerView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                BotMessage audioMessage=(BotMessage)messageArrayList.get(position);
+                Message audioMessage=(Message)messageArrayList.get(position);
                 if(audioMessage!=null && !audioMessage.getMessage().isEmpty()){
                     new SayTask().execute(audioMessage.getMessage());
                 }
@@ -156,11 +171,111 @@ public class ChatBot extends AppCompatActivity {
     }
 
     private void sendMessage() {
-        final String inputMessage=this.inputMessage.getText().toString().trim();
 
+        final String inputmessage = this.inputMessage.getText().toString().trim();
+        if (!this.initialRequest) {
+            Message inputMessage = new Message();
+            inputMessage.setMessage(inputmessage);
+            inputMessage.setId("1");
+            messageArrayList.add(inputMessage);
+        } else {
+            Message inputMessage = new Message();
+            inputMessage.setMessage(inputmessage);
+            inputMessage.setId("100");
+            this.initialRequest = false;
+            Toast.makeText(getApplicationContext(), "Tap on the message for Voice", Toast.LENGTH_LONG).show();
 
+        }
 
+        this.inputMessage.setText("");
+        mAdapter.notifyDataSetChanged();
 
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                try {
+                    if (watsonAssistantSession == null) {
+                        ServiceCall<SessionResponse> call = watsonAssistant.createSession(new CreateSessionOptions.Builder().assistantId(context.getString(R.string.assistant_id)).build());
+                        watsonAssistantSession = call.execute();
+                    }
+
+                    MessageInput input = new MessageInput.Builder()
+                            .text(inputmessage)
+                            .build();
+                    MessageOptions options = new MessageOptions.Builder()
+                            .assistantId(context.getString(R.string.assistant_id))
+                            .input(input)
+                            .sessionId(watsonAssistantSession.getResult().getSessionId())
+                            .build();
+                    Response<MessageResponse> response = watsonAssistant.message(options).execute();
+                    Log.i(TAG, "run: " + response.getResult());
+                    if (response != null &&
+                            response.getResult().getOutput() != null &&
+                            !response.getResult().getOutput().getGeneric().isEmpty()) {
+
+                        List<RuntimeResponseGeneric> responses = response.getResult().getOutput().getGeneric();
+
+                        for (RuntimeResponseGeneric r : responses) {
+                            Message outMessage;
+                            switch (r.responseType()) {
+                                case "text":
+                                    outMessage = new Message();
+                                    outMessage.setMessage(r.text());
+                                    outMessage.setId("2");
+
+                                    messageArrayList.add(outMessage);
+
+                                    // speak the message
+                                    new SayTask().execute(outMessage.getMessage());
+                                    break;
+
+                                case "option":
+                                    outMessage =new Message();
+                                    String title = r.title();
+                                    String OptionsOutput = "";
+                                    for (int i = 0; i < r.options().size(); i++) {
+                                        DialogNodeOutputOptionsElement option = r.options().get(i);
+                                        OptionsOutput = OptionsOutput + option.getLabel() +"\n";
+
+                                    }
+                                    outMessage.setMessage(title + "\n" + OptionsOutput);
+                                    outMessage.setId("2");
+
+                                    messageArrayList.add(outMessage);
+
+                                    // speak the message
+                                    new SayTask().execute(outMessage.getMessage());
+                                    break;
+
+                                case "image":
+                                    outMessage = new Message();
+                                    messageArrayList.add(outMessage);
+
+                                    // speak the description
+                                    new SayTask().execute("You received an image: " + outMessage.getTitle() + outMessage.getDescription());
+                                    break;
+                                default:
+                                    Log.e("Error", "Unhandled message type");
+                            }
+                        }
+
+                        runOnUiThread(new Runnable() {
+                            public void run() {
+                                mAdapter.notifyDataSetChanged();
+                                if (mAdapter.getItemCount() > 1) {
+                                    recyclerView.getLayoutManager().smoothScrollToPosition(recyclerView, null, mAdapter.getItemCount() - 1);
+
+                                }
+
+                            }
+                        });
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        thread.start();
     }
 
     //method returns true or false based on users connection status
@@ -224,7 +339,7 @@ public class ChatBot extends AppCompatActivity {
                 .audio(audio)
                 .contentType(ContentType.OPUS.toString())
                 .model("en-US_BroadbandModel")
-//                .interimResult(true)
+                //.interimResult(true)
                 .inactivityTimeout(2000)
                 .build();
 
@@ -320,3 +435,5 @@ public class ChatBot extends AppCompatActivity {
         });
     }
 }
+
+

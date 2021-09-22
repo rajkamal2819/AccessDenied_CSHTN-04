@@ -6,15 +6,15 @@ import com.ibm.watson.assistant.v1.model.RuntimeResponseGeneric;
 import java.io.Serializable;
 
 
-public class BotMessage implements Serializable {
+public class Message implements Serializable {
     String id, message, url, title, description;
     Type type;
 
-    public BotMessage(){
+    public Message(){
         this.type=Type.TEXT;
     }
 
-    public BotMessage(RuntimeResponseGeneric r){
+    public Message(RuntimeResponseGeneric r){
         this.message="";
         this.title=r.title();
         this.description=r.description();
