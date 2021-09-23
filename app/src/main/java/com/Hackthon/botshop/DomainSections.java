@@ -74,7 +74,7 @@ public class DomainSections extends AppCompatActivity {
         user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(DomainSections.this,UserProfile.class);
+                Intent i = new Intent(DomainSections.this,EditProfile.class);
                 startActivity(i);
             }
         });
