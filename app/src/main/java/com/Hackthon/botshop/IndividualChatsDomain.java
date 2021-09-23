@@ -7,8 +7,10 @@ import android.os.Bundle;
 
 import com.Hackthon.botshop.AdapterModels.FragmentAdapter;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class IndividualChatsDomain extends AppCompatActivity {
 
@@ -17,12 +19,14 @@ public class IndividualChatsDomain extends AppCompatActivity {
 
     DatabaseReference refer;
     FirebaseUser firebaseUser;
+    FirebaseDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_individual_chat_domain);
 
+        database = FirebaseDatabase.getInstance();
         viewPager = findViewById(R.id.viewPager);
         tabLayout = findViewById(R.id.tabLayout);
 
@@ -30,5 +34,20 @@ public class IndividualChatsDomain extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String currentId = FirebaseAuth.getInstance().getUid();
+        database.getReference().child("presence").child(currentId).setValue("Online");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        String currentId = FirebaseAuth.getInstance().getUid();
+        database.getReference().child("presence").child(currentId).setValue("Offline");
+    }
+
 
 }

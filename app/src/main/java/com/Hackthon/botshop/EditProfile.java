@@ -202,35 +202,6 @@ public class EditProfile extends AppCompatActivity {
         });
     }
 
-    /*@Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-                if(data.getData()!=null){
-                    Uri selectedImage = data.getData();
-                    binding.editProfilePhoto.setImageURI(selectedImage);
-                    final StorageReference reference;
-                     reference = storage.getReference().child("profile picture").child(FirebaseAuth.getInstance().getUid());
-                     reference.putFile(selectedImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                         @Override
-                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                              //userProfileImage.setImageURI(selectedImage);  --> i guess we need to first download it
-                             // Toast.makeText(EditProfile.this,"Image updated successfully",Toast.LENGTH_SHORT).show();
-                              reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                  @Override
-                                  public void onSuccess(Uri uri) {
-                                     database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid())
-                                             .child("profilePic").setValue(uri.toString());
-
-                                      Toast.makeText(EditProfile.this,"Image updated successfully",Toast.LENGTH_SHORT).show();
-                                  }
-                              });
-                         }
-                     });
-
-                }
-    }*/
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

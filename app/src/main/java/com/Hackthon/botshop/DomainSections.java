@@ -38,6 +38,8 @@ public class DomainSections extends AppCompatActivity {
         chatBot = findViewById(R.id.chat_bot_domain);
         user = findViewById(R.id.user_domain);
 
+        database = FirebaseDatabase.getInstance();
+
 
         chatBot.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,6 +91,8 @@ public class DomainSections extends AppCompatActivity {
 
     }
 
+
+
     /*private void status(String status){
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -112,7 +116,7 @@ public class DomainSections extends AppCompatActivity {
         status("Offline");
     }*/
 
-    @Override
+    /*@Override
     protected void onStart() {
         super.onStart();
         String currId = FirebaseAuth.getInstance().getUid();
@@ -126,11 +130,27 @@ public class DomainSections extends AppCompatActivity {
         String currId = FirebaseAuth.getInstance().getUid();
         database = FirebaseDatabase.getInstance();
         database.getReference().child("Presence").child(currId).setValue("Offline");
-    }
+    } */
 
     @Override
     public void onBackPressed() {
         finishAffinity();
         super.onBackPressed();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String currentId = FirebaseAuth.getInstance().getUid();
+        database.getReference().child("presence").child(currentId).setValue("Online");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        String currentId = FirebaseAuth.getInstance().getUid();
+        database.getReference().child("presence").child(currentId).setValue("Offline");
+    }
+
+
 }

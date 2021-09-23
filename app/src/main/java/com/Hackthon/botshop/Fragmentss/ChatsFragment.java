@@ -53,6 +53,7 @@ public class ChatsFragment extends Fragment {
         UserAdapter userAdapter = new UserAdapter(list,getContext());
         binding.chatRecyclerView.setAdapter(userAdapter);
 
+
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         Log.i(LOG_TAG,"FireBaseUI: "+firebaseUser.getUid());
 

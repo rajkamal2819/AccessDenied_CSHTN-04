@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.Hackthon.botshop.AdapterModels.ChatAdapter;
@@ -45,7 +46,6 @@ public class ChatDetailsActivity extends AppCompatActivity {
     String senderRoom;
     String receiverRoom;
     String senderId;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,7 +116,27 @@ public class ChatDetailsActivity extends AppCompatActivity {
                     }
                 });
 
-        binding.sendArrow.setOnClickListener(new View.OnClickListener() {
+        database.getReference().child("presence").child(receiverId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    String status = snapshot.getValue(String.class);
+                    if(status.equals("Online")){
+                             binding.txtOnline.setVisibility(View.VISIBLE);
+                    }else{
+                              binding.txtOnline.setVisibility(View.GONE);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+                binding.sendArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
