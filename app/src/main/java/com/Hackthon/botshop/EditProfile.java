@@ -118,15 +118,37 @@ public class EditProfile extends AppCompatActivity {
                 String name = binding.editProfileUserName.getText().toString();
                 String status = binding.editProfileStatus.getText().toString();
 
-                if(name.isEmpty()) {
-                    binding.editProfileUserName.setError("Please type a name");
-                    return;
+                if(!status.isEmpty()&&name.isEmpty()&&selectedImage==null) {
+
+                    String uid = auth.getCurrentUser().getUid();
+                    Users user = new Users();
+                    user.setStatus(status);
+                    database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid())
+                            .child("status").setValue(user.getStatus()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(EditProfile.this, "Status updated", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
-                /*if(status.isEmpty()) {
+                else if(!name.isEmpty()&&status.isEmpty()&&selectedImage==null){
+                    String uid = auth.getCurrentUser().getUid();
+                    Users user = new Users();
+                    user.setName(name);
+                    database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid())
+                            .child("name").setValue(user.getName()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(EditProfile.this,"user name updated",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+                else if(name.isEmpty()&&status.isEmpty()) {
+                    binding.editProfileUserName.setError("Please type a name");
                     binding.editProfileStatus.setError("Please type a name");
                     return;
-                }*/
-                if(selectedImage != null) {
+                }
+                else if(selectedImage != null) {
                     StorageReference reference = storage.getReference().child("Profiles").child(auth.getUid());
                     reference.putFile(selectedImage).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -174,8 +196,6 @@ public class EditProfile extends AppCompatActivity {
                             }
                         }
                     });
-                }else{
-                    Toast.makeText(EditProfile.this,"Invalid image",Toast.LENGTH_SHORT).show();
                 }
 
             }
