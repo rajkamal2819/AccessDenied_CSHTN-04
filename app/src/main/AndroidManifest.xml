@@ -76,7 +76,7 @@
             android:label="Chat With Us"
             android:parentActivityName=".DomainSections"
             android:screenOrientation="portrait"
-            android:theme="@style/DomainTheme" />
+            android:theme="@style/NoActionBarTheme" />
         <activity
             android:name=".DomainSections"
             android:exported="true"

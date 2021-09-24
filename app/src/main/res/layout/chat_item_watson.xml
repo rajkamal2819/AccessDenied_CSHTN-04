@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:background = "@drawable/watson_item"
+    android:layout_margin="10dp"
+    android:backgroundTint="@color/white"
     android:layout_height="wrap_content">
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -14,12 +18,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="10dp"
+        android:layout_margin="5dp"
+        android:padding="2dp"
+        android:text="Watson"
         android:autoLink="web"
-
         android:fontFamily="sans-serif"
         android:textColor="@android:color/black"
         android:textIsSelectable="true"
