@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.Hackthon.botshop.ChatDetailsActivity;
 import com.Hackthon.botshop.Models.Users;
+import com.Hackthon.botshop.PopUpWindow;
 import com.Hackthon.botshop.R;
 import com.squareup.picasso.Picasso;
 
@@ -59,6 +60,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
                 i.putExtra("UserId",user.getUserId());
                 i.putExtra("profilePic",user.getProfilePic());
                 i.putExtra("userName",user.getName());
+                i.putExtra("emailId",user.getEmailId());
+                i.putExtra("status",user.getStatus());
                 context.startActivity(i);
             }
         });

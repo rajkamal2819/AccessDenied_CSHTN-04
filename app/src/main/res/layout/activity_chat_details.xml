@@ -7,76 +7,6 @@
     android:background="@color/chatBackground"
     tools:context=".ChatDetailsActivity">
 
-   <!-- <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/navy_blue"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/chatbackArrow"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginTop="7dp"
-                android:layout_marginBottom="15dp"
-                android:src="@drawable/ic_action_arrow"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/chatDetailsProfilePic"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="5dp"
-                android:padding="5dp"
-                android:src="@drawable/user_profile_img"
-                app:civ_border_color="#FF000000"
-                app:civ_border_width="2dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/chatbackArrow"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <TextView
-                android:id="@+id/chatDetailsUserName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="7dp"
-                android:layout_marginBottom="15dp"
-                android:text="User Name"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/chatDetailsProfilePic"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="30dp"
-                android:layout_marginBottom="10dp"
-                android:text="online"
-                android:textAllCaps="true"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.appcompat.widget.Toolbar>-->
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -84,6 +14,7 @@
         android:background="@color/navy_blue"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme">
+
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -129,6 +60,7 @@
                     android:text="Online"
                     android:textColor="@color/white"
                     android:visibility="gone" />
+
             </LinearLayout>
 
         </LinearLayout>
@@ -190,5 +122,15 @@
             android:src="@drawable/ic_action_send_arrow" />
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/description_popup"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_weight="2"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="10dp"
+        android:src="@drawable/description_img"
+        app:tint="@color/white" />
 
 </RelativeLayout>

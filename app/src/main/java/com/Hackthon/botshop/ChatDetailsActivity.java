@@ -9,6 +9,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -58,8 +59,12 @@ public class ChatDetailsActivity extends AppCompatActivity {
 
          senderId = auth.getUid();
          String receiverId = getIntent().getStringExtra("UserId");
+        Log.i("ChatDetailsActivity",receiverId);
         String userName = getIntent().getStringExtra("userName");
         String profilePic = getIntent().getStringExtra("profilePic");
+        String email = getIntent().getStringExtra("emailId");
+        String status = getIntent().getStringExtra("status");
+
         storage = FirebaseStorage.getInstance();
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Uploading image...");
@@ -83,6 +88,19 @@ public class ChatDetailsActivity extends AppCompatActivity {
                 i.setAction(Intent.ACTION_GET_CONTENT);
                 i.setType("image/*");
                 startActivityForResult(i,25);
+            }
+        });
+
+        binding.descriptionPopup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ChatDetailsActivity.this,PopUpWindow.class);
+                i.putExtra("UserId",receiverId);
+                i.putExtra("profilePic",profilePic);
+                i.putExtra("userName",userName);
+                i.putExtra("emailId",email);
+                i.putExtra("status",status);
+                startActivity(i);
             }
         });
 

@@ -107,7 +107,8 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signIn();
+
+                    signIn();
             }
         });
 
@@ -142,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         progressDialog.dismiss();
                                         Users newUser = new Users(userName.getText().toString(), userEmail.getText().toString(), userPassword.getText().toString());
+                                        newUser.setStatus("Empty");
                                         String id = task.getResult().getUser().getUid();
                                         firebaseDatabase.getReference().child("Users").child(id).setValue(newUser);
                                         Toast.makeText(MainActivity.this, "User Created Successfully", Toast.LENGTH_SHORT).show();
@@ -217,11 +219,16 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finishAffinity();
+    }
 
     private void signIn() {
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-        Log.i(LOG_TAG,"Sign in done");
+            Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+            startActivityForResult(signInIntent, RC_SIGN_IN);
+            Log.i(LOG_TAG, "Sign in done");
     }
 
     @Override
@@ -279,6 +286,8 @@ public class MainActivity extends AppCompatActivity {
                             Users users = new Users();
                             users.setUserId(user.getUid());
                             users.setName(user.getDisplayName());
+                            users.setStatus("Empty");
+                            users.setEmailId(user.getEmail());
                             users.setProfilePic(user.getPhotoUrl().toString());
                             firebaseDatabase.getReference().child("Users").child(user.getUid()).setValue(users);
 

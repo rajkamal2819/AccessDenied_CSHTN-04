@@ -15,7 +15,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.Hackthon.botshop.AdapterModels.UserAdapter;
+import com.Hackthon.botshop.IndividualChatsDomain;
 import com.Hackthon.botshop.Models.Users;
+import com.Hackthon.botshop.PopUpWindow;
 import com.Hackthon.botshop.R;
 import com.Hackthon.botshop.databinding.FragmentChatsBinding;
 import com.google.firebase.auth.FirebaseAuth;
@@ -39,7 +41,6 @@ public class ChatsFragment extends Fragment {
     FragmentChatsBinding binding;
     ArrayList<Users> list = new ArrayList<>();
     FirebaseDatabase database;
-    ImageView img_online;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,11 +49,9 @@ public class ChatsFragment extends Fragment {
         binding = FragmentChatsBinding.inflate(inflater, container, false);
 
         database = FirebaseDatabase.getInstance();
-        img_online = container.findViewById(R.id.img_online);
 
         UserAdapter userAdapter = new UserAdapter(list,getContext());
         binding.chatRecyclerView.setAdapter(userAdapter);
-
 
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         Log.i(LOG_TAG,"FireBaseUI: "+firebaseUser.getUid());
