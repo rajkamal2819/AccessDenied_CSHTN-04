@@ -81,6 +81,9 @@ public class ChatDetailsActivity extends AppCompatActivity {
             }
         });
 
+
+
+
         binding.attachment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
