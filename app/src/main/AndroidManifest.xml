@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.Hackthon.botshop" >
-
+    package="com.Hackthon.botshop">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -21,12 +20,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BotShop"
-        android:usesCleartextTraffic="true" >
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".PopUpWindow"
+            android:theme="@style/popup_window"
+            android:screenOrientation="portrait"
+            android:exported="true" />
         <activity
             android:name=".EditProfile"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/editProfile"/>
+            android:theme="@style/editProfile" />
         <activity
             android:name=".ChatDetailsActivity"
             android:exported="true"
@@ -82,7 +86,7 @@
             android:name=".MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/NoActionBarTheme" >
+            android:theme="@style/NoActionBarTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
