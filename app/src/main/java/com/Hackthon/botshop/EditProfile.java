@@ -41,6 +41,7 @@ import java.util.HashMap;
 
 public class EditProfile extends AppCompatActivity {
 
+    //Profile
     ActivityEditProfileBinding binding;
     FirebaseStorage storage;
     FirebaseAuth auth;
